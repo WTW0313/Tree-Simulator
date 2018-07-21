@@ -13,6 +13,16 @@ module.exports = {
       "no-console": "error",
       "arrow-parens": ["error", "always"],
       "eqeqeq": ["error", "always", {"null": "ignore"}],
-      "camelcase": ["error", { "properties": "always" }]
+      "camelcase": ["error", { "properties": "always" }],
+      "comma-dangle": ["error", "never"],
+      "require-jsdoc": ["error", {
+        "require": {
+            "FunctionDeclaration": true,
+            "MethodDefinition": false,
+            "ClassDeclaration": false,
+            "ArrowFunctionExpression": false,
+            "FunctionExpression": false
+        }
+    }]
   }
 }
