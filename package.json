@@ -1,0 +1,30 @@
+{
+  "name": "tree-simulator",
+  "version": "1.0.0",
+  "description": "A Web Application----Simulation of the growth of plants",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "webpack -w",
+    "dev": "php -S localhost:8080 -f \"index.php\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WTW0313/Tree-Simulator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WTW0313/Tree-Simulator/issues"
+  },
+  "homepage": "https://github.com/WTW0313/Tree-Simulator#readme",
+  "dependencies": {
+    "webpack": "^4.16.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack-cli": "^3.1.0"
+  }
+}
