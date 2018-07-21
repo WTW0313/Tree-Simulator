@@ -1,2 +1,1 @@
-import {say} from "./test.js";
-say();
+import canvas from "canvas.js";

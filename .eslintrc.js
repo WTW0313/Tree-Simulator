@@ -11,7 +11,8 @@ module.exports = {
       "quotes": ["error", "double"],
       "semi": ["error", "always"],
       "no-console": "error",
-      "arrow-parens": "always",
-      "eqeqeq": ["error", "always", {"null": "ignore"}]
+      "arrow-parens": ["error", "always"],
+      "eqeqeq": ["error", "always", {"null": "ignore"}],
+      "camelcase": ["error", { "properties": "always" }]
   }
 }
