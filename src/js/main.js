@@ -1,2 +1,2 @@
-import {say} from './test.js';
+import {say} from "./test.js";
 say();
