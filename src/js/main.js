@@ -32,44 +32,31 @@ canvas.onclick = function() {
   ctx.fillstyle = "#000000"
   ctx.strokeRect(0, 0, window.screen.width, window.screen.height)
   let i = 0
-  let cnt = 0;
-  let
-  for (let i = 0;i < oldBranches.oldBranchesX.length;i++) {
+  let timer = setInterval(() => {
+    if (i >= oldBranches.oldBranchesX.length) {
+      clearInterval(timer)
+    }
     if (oldBranches.oldBranchesCategory[i] === "trunk") {
-      let promise1 = new Promise(function (resolve, reject) {
-        timer1 = setTimeout(function() {
-          ctx.fillStyle = "#946A2C"
-          ctx.shadowcolor = "#946A2C"
-          ctx.shadowBlur = 2
-          ctx.beginPath()
-          ctx.moveTo(oldBranches.oldBranchesX[i], oldBranches.oldBranchesY[i])
-          ctx.arc(oldBranches.oldBranchesX[i], oldBranches.oldBranchesY[i], oldBranches.oldBranchesR[i], 0, 2*Math.PI, true)
-          ctx.closePath()
-          ctx.fill()
-          resolve()
-        }, 10000)
-      })
-      promise1.then(() => {
-        clearTimeout(timer1)
-      })
+      ctx.fillStyle = "#946A2C"
+      ctx.shadowcolor = "#946A2C"
+      ctx.shadowBlur = 2
+      ctx.beginPath()
+      ctx.moveTo(oldBranches.oldBranchesX[i], oldBranches.oldBranchesY[i])
+      ctx.arc(oldBranches.oldBranchesX[i], oldBranches.oldBranchesY[i], oldBranches.oldBranchesR[i], 0, 2*Math.PI, true)
+      ctx.closePath()
+      ctx.fill()
     }
-    else {
-      let promise2 = new Promise(function (resolve, reject) {
-        timer2 = setTimeout(function() {
-          ctx.fillStyle = "#83AD50"
-          ctx.shadowcolor = "#83AD50"
-          ctx.shadowBlur = 2
-          ctx.beginPath()
-          ctx.moveTo(oldBranches.oldBranchesX[i], oldBranches.oldBranchesY[i])
-          ctx.arc(oldBranches.oldBranchesX[i], oldBranches.oldBranchesY[i], 4, 0, 2*Math.PI, true)
-          ctx.closePath()
-          ctx.fill()
-          resolve()
-        }, 10000)
-      })
-      promise2.then(() => {
-        clearTimeout(timer2)
-      })
+    if (oldBranches.oldBranchesCategory[i] === "leaf") {
+      ctx.fillStyle = "#83AD50"
+      ctx.shadowcolor = "#83AD50"
+      ctx.shadowBlur = 2
+      ctx.beginPath()
+      ctx.moveTo(oldBranches.oldBranchesX[i], oldBranches.oldBranchesY[i])
+      ctx.arc(oldBranches.oldBranchesX[i], oldBranches.oldBranchesY[i], 4, 0, 2*Math.PI, true)
+      ctx.closePath()
+      ctx.fill()
     }
-  }
+    console.log(i)
+    i = i + 1
+  }, 10)
 }
