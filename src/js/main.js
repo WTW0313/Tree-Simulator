@@ -1,9 +1,3 @@
-// import {createCanvas} from "./createCanvas.js"
-// import {Branch} from "./tree/Branch.js"
-// import {BranchCollection} from "./tree/BranchCollection.js"
-// import {dieBranches} from "./tree/dieBranches.js"
-// import {initialBranch} from "./tree/initialBranch.js"
-// import {pointsGenerator} from "./tree/pointsGenerator.js"
 import {Branch, BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenerator} from "./newTree"
 export {canvas, ctx, branches, oldBranches}
 
