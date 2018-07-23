@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
 <script src="./dist/main.js"></script>
 <?php
 ?>
