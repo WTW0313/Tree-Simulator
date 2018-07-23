@@ -52,8 +52,8 @@ Branch.prototype = {
     let theta = Math.PI / 2
     ctx.fillStyle = "#83AD50"
     ctx.shadowColor = "#83AD50"
-    ctx.beginPath();
-    ctx.moveTo(this.x, this.y);
+    ctx.beginPath()
+    ctx.moveTo(this.x, this.y)
     ctx.arc(this.x + 10 * p * Math.cos(theta * p), this.y - 10 * p * Math.sin(theta * p), 4, 0, 2 * Math.PI, true)
     ctx.closePath()
     ctx.fill()
