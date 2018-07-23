@@ -11,7 +11,6 @@
 </script>
 <script src="./dist/main.js"></script>
 <?php
-    echo 'hello world!!'
 ?>
 </body>
 </html>
