@@ -5,7 +5,15 @@ class database {
     var $password;
     var $database_name;
     var $table_name;
-    var $tree_message;
+    var $tree_message;//关联数组
+
+    /** 函数构造器 输入数据库相关参数
+     * database constructor.
+     * @param $servername
+     * @param $username
+     * @param $psd
+     * @param $dbname
+     */
     function __construct($servername,$username,$psd,$dbname) {
         $this->server_name = $servername;
         $this->user_name = $username;
@@ -18,7 +26,6 @@ class database {
     function connect_database () {
         return new PDO("mysql:host=$this->server_name;dbname=$this->database_name",$this->user_name,$this->password);
     }
-
 
     function create_database() {
         try {
@@ -52,6 +59,11 @@ class database {
         }
     }
 
+    /**
+     * @param $uname    登录、注册时用户名和密码
+     * @param $pswd
+     * @return string 用户已存在或者注册成功
+     */
     function register($uname,$pswd) {
         try {
             $conn = $this->connect_database();
@@ -65,11 +77,17 @@ class database {
             $sql = "insert into $this->table_name (username,password) 
         values ($uname,$pswd)";
             $conn->exec($sql);
+            return "注册成功！";
         }catch (PDOException $e) {
             echo "register" . "<br>" . $e->getMessage();
         }
     }
 
+    /**
+     * @param $uname
+     * @param $pswd
+     * @return string 用户不存在     登录成功      密码错误
+     */
     function login($uname,$pswd) {
         try {
             $conn = $this->connect_database();
@@ -87,6 +105,13 @@ class database {
         }
     }
 
+    /**将数据储存到数据库
+     * @param $uname 用户名
+     * @param $x    树的四个参数所属文件的路径
+     * @param $y
+     * @param $r
+     * @param $c
+     */
     function set_tree_message ($uname,$x,$y,$r,$c) {
         try {
             $conn = $this->connect_database();
@@ -112,6 +137,9 @@ class database {
         }
     }
 
+    /**根据用户名从数据库获得树的参数的文件的路径；
+     * @param $uname
+     */
     function get_tree_message($uname) {
         try {
             $conn = $this->connect_database();
