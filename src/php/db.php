@@ -5,6 +5,7 @@ class database {
     var $password;
     var $database_name;
     var $table_name;
+    var $tree_message;
     function __construct($servername,$username,$psd,$dbname) {
         $this->server_name = $servername;
         $this->user_name = $username;
@@ -86,10 +87,47 @@ class database {
         }
     }
 
-    function get_tree_message ($uname,$pswd,$x,$y,$r,$c) {
-        $conn = $this->connect_database();
-        $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    function set_tree_message ($uname,$x,$y,$r,$c) {
+        try {
+            $conn = $this->connect_database();
+            $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-        $sql
+            $find = "select * from $this->table_name where username = '$uname'";
+            $res = $conn->query($find);
+            $sql = "insert into $this->table_name (x_coordinate,y_coordinate,radius,category)
+        values ($x,$y,$r,$c)";
+            $update = "replace into $this->table_name (x_coordinate,y_coordinate,radius,category)
+        values ($x,$y,$r,$c)";
+            foreach ($res as $row) {
+                if ($row['username'] == $uname) {
+                    if ($row[x_coordinate] != null) {
+                        $conn->exec($update);
+                    }else {
+                        $conn->exec($sql);
+                    }
+                }
+            }
+        }catch (PDOException $e) {
+            echo "setTreeMessage" . "<br>" . $e->getMessage();
+        }
+    }
+
+    function get_tree_message($uname) {
+        try {
+            $conn = $this->connect_database();
+            $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+            $sql = "select * from $this->table_name where username = '$uname'";
+            $res = $conn->query($sql);
+            foreach ($res as $row) {
+                if ($row['username'] == $uname) {
+                    $this->tree_message = array("x"=>$row['x_coordinate'],"y"=>$row['y_coordinate'],
+                        "r"=>$row['radius'],"c"=>['category']);
+                }
+            }
+        }catch (PDOException $e) {
+            echo "getTreeMessage" . "<br>" . $e->getMessage();
+        }
     }
 }
+?>
