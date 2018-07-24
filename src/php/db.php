@@ -1,28 +1,28 @@
 <?php
 /**
-create a database
+ * reate a database
  * @function
  * @param {String} $server_name "127.0.0.1"
  * @param {String} $db_username your MySQL username
  * @param {String} $db_password your MySQL password
  * @param {String} $database_name  the name of new database
  */
-function create_database($server_name,$db_username,$db_password,$database_name) {
+function create_database($server_name, $db_username, $db_password, $database_name) {
     try {
-        $connect = new PDO("mysql:host=$server_name",$db_username,$db_password);
-        $connect->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $connect = new PDO("mysql:host=$server_name", $db_username, $db_password);
+        $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "create database $database_name";
         $connect->exec($sql);
-    }catch (PDOException $exception) {
+    } catch (PDOException $exception) {
         $error_file = fopen("error.txt","w");
-        fwrite($error_file,"From create_database\n");
-        fwrite($error_file,$exception->getMessage());
+        fwrite($error_file, "From create_database\n");
+        fwrite($error_file, $exception->getMessage());
         fclose($error_file);
     }
 };
 /**
-create a table
+ * create a table
  * @function
  * @param {String} $server_name "127.0.0.1"
  * @param {String} $db_username your MySQL username
@@ -86,7 +86,8 @@ $register_username,$register_password) {
     }
 }
 
-/**check login and login
+/**
+ * check login and login
  * @param $server_name
  * @param $db_username
  * @param $db_password
