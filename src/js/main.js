@@ -1,4 +1,5 @@
 import {Branch, BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenerator} from "./newTree"
+
 export {canvas, ctx, branches, oldBranches}
 
 window.addEventListener("load", main)
@@ -6,6 +7,7 @@ let canvas = document.createElement("canvas")
 let ctx = canvas.getContext("2d")
 let branches = new BranchCollection()
 let oldBranches = new dieBranches()
+let save = { }
 
 /**
  * Executive function
@@ -15,7 +17,6 @@ function main() {
   createCanvas(window.screen.width, window.screen.height)
   initialBranch()
   pointsGenerator()
-  console.log(oldBranches)
 }
 
 /**
@@ -23,6 +24,8 @@ function main() {
  * @function
  */
 canvas.onclick = function() {
+  save = JSON.stringify(oldBranches)
+  console.log(save)
   canvas.height = canvas.height
   ctx.fillstyle = "#000000"
   ctx.strokeRect(0, 0, window.screen.width, window.screen.height)
@@ -51,7 +54,6 @@ canvas.onclick = function() {
       ctx.closePath()
       ctx.fill()
     }
-    console.log(i)
     i = i + 1
   }, 10)
 }
