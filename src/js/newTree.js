@@ -54,14 +54,6 @@ Branch.prototype = {
   drawPoints: function() {
     let p = Math.random()
     let theta = Math.PI / 2
-    // ctx.fillStyle = "#83AD50"
-    // ctx.shadowColor = "#83AD50"
-    // ctx.shadowBlur = 2
-    // ctx.beginPath()
-    // ctx.moveTo(this.x, this.y)
-    // ctx.arc(this.x + 10 * p * Math.cos(theta * p), this.y - 10 * p * Math.sin(theta * p), 4, 0, 2 * Math.PI, true)
-    // ctx.closePath()
-    // ctx.fill()
     oldBranches.addX(this.x + 10 * p * Math.cos(theta * p))
     oldBranches.addY(this.y - 10 * p * Math.sin(theta * p))
     oldBranches.addR(4)
@@ -147,6 +139,7 @@ BranchCollection.prototype = {
 
 /**
  * dieBranches类
+ * @constructor
  * @param {number[]} oldBranchesX An array of the x-coordinates of the points of branches.
  * @param {number[]} oldBranchesY An array of the y-coordinates of the points of branches.
  * @param {number[]} oldBranchesR An array of the radius of the points of branches.
@@ -157,8 +150,6 @@ let dieBranches = function () {
   this.oldBranchesX = []
   this.oldBranchesY = []
   this.oldBranchesR = []
-  // this.oldBranchesLeafx = []
-  // this.oldBranchesLeafy = []
   this.oldBranchesCategory = []
 }
 dieBranches.prototype = {

@@ -15,8 +15,7 @@ function main() {
   createCanvas(window.screen.width, window.screen.height)
   initialBranch()
   pointsGenerator()
-  let save = oldBranches.toJSONString()
-  console.log(save)
+  console.log(oldBranches)
 }
 
 /**
