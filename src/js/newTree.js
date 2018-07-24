@@ -173,6 +173,9 @@ dieBranches.prototype = {
   },
   addCate: function (C) {
     this.oldBranchesCategory.push(C)
+  },
+  getBranches: function () {
+    return this
   }
 }
 

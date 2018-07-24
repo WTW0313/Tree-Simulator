@@ -73,7 +73,6 @@ class database {
         try {
             $conn = $this->connect_database();
             $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
             $user_list = "select * from $this->table_name where username = '$uname'";
             $res = $conn->query($user_list);
             if ($res == null) return "用户不存在！";
