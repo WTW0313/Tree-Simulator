@@ -73,5 +73,22 @@ class database {
         try {
             $conn = $this->connect_database();
             $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $user_list = "select * from $this->table_name where username = '$uname'";
+            $res = $conn->query($user_list);
+            if ($res == null) return "用户不存在！";
+            foreach ($res as $row) {
+                if ($row['password'] == $pswd) return "登录成功！";
+                else return "密码错误";
+            }
+        }catch (PDOException $e) {
+            echo "login" . "<br>" .$e->getMessage();
+        }
+    }
+
+    function get_tree_message ($uname,$pswd,$x,$y,$r,$c) {
+        $conn = $this->connect_database();
+        $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+        $sql
     }
 }
