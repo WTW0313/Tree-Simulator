@@ -68,16 +68,23 @@ class database {
         try {
             $conn = $this->connect_database();
             $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
+            if ($uname == "" || $pswd == "") {
+                echo "用户名或密码不能为空";
+                return;
+            }
             $user_list = "select * from $this->table_name";
             $res = $conn->query($user_list);
             foreach ($res as $row) {
-                if ($row['username'] == $uname) return "该用户已存在";
+                if ($row['username'] == $uname) {
+                    echo "用户已存在！";
+                    return;
+                }
             }
             $sql = "insert into $this->table_name (username,password) 
         values ('$uname','$pswd')";
             $conn->exec($sql);
-            return "注册成功！";
+            echo "注册成功！";
+            return ;
         }catch (PDOException $e) {
             echo "register" . "<br>" . $e->getMessage();
         }
@@ -94,17 +101,22 @@ class database {
             $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
             $user_list = "select * from $this->table_name where username = '$uname'";
             $res = $conn->query($user_list);
+            if ($uname == "" && $pswd == ""){
+                echo "";
+                return false;
+            };
             foreach ($res as $row) {
                 if ($row['password'] == $pswd) {
                     echo "登录成功！";
-                    return;
+                    return true;
                 }
                 else {
                     echo "密码错误";
-                    return;
+                    return false;
                 }
             }
             echo "用户不存在";
+            return false;
         }catch (PDOException $e) {
             echo "login" . "<br>" .$e->getMessage();
         }
