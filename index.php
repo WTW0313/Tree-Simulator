@@ -8,9 +8,6 @@
         <title>Document</title>
     </head>
     <body>
-        <div id="loading">
-            <input class="btn-enter" type="button" value="Enter" onclick="console.log(drawTree)">
-        </div>
         <?php
         ?>
     </body>

@@ -1,4 +1,4 @@
-import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2} from "./main"
+import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3, ctx3} from "./main"
 
 export {Branch, BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenerator}
 
@@ -186,6 +186,11 @@ let createCanvas = function(w, h) {
   ctx2.fillstyle = "#000000"
   ctx2.strokeRect(0, 0, w, h)
   document.body.appendChild(canvas2)
+  canvas3.width = w
+  canvas3.height = h
+  ctx3.fillstyle = "#000000"
+  ctx3.strokeRect(0, 0, w, h)
+  document.body.appendChild(canvas3)
 }
 
 /**
@@ -209,12 +214,19 @@ let initialBranch = function() {
  * Generate all points.
  * @function
  */
-let pointsGenerator = function() {
-  let timer = setInterval(function() {
-    branches.process()
-    console.log(oldBranches.oldBranchesX.length)
-    if (branches.branches.length === 0) {
-      clearInterval(timer)
-    }
-  }, 20)
+let pointsGenerator = function(isLoaded) {
+  let promise = new Promise((resolve, reject) => {
+    let timer = setInterval(function() {
+      branches.process()
+      console.log(oldBranches.oldBranchesX.length)
+      if (branches.branches.length === 0) {
+        clearInterval(timer)
+        resolve()
+      }
+    }, 10)
+  })
+  promise.then(() => {
+    isLoaded = true
+    showButton()
+  })
 }

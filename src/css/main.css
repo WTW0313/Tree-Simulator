@@ -16,6 +16,14 @@ body {
 }
 
 .canvas2 {
+  z-index: 4;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color:rgba(255,255,255,0);
+}
+
+.canvas3 {
   z-index: 3;
   position: absolute;
   left: 0px;
@@ -23,24 +31,37 @@ body {
   background-color:rgba(255,255,255,0);
 }
 
-#loading {
-  z-index: 10;
-  background-color:rgba(255,255,255,0);
-  height: auto;
+.btn-start {
+  z-index: 5;
+  position: absolute;
+  margin: 0%;
+  bottom: 0%;
+  left: 0%;
+  color: #4FB39A;
+  background-color: #FFFFFF;
+  border: none;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  height: auto;
+  font-size: 50px;
   text-align: center;
   vertical-align: -webkit-baseline-middle;
-  position: absolute;
-  top: 30%;
+  outline:none; 
 }
 
-.btn-enter {
-  z-index: 10;
-  background-color: black;
-  font-size: 30px;
-  color: #66ccff;
-  width: auto;
+.btn-start:hover {
+  z-index: 5;
+  position: absolute;
+  margin: 0%;
+  bottom: 0%;
+  left: 0%;
+  color: #4FB39A;
+  background-color: #FFFFFF;
+  border: none;
+  width: 100%;
   height: auto;
+  font-size: 50px;
+  text-shadow: 5px 5px 8px #95D479;
+  text-align: center;
+  vertical-align: -webkit-baseline-middle;
+  outline:none; 
 }

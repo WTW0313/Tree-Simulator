@@ -2,7 +2,9 @@ var path = require("path")
 var webpack = require("webpack")
 
 module.exports = {
-  entry: __dirname + "/src/js/main.js",
+  entry:[
+    __dirname + "/src/js/main.js"
+  ],
   output: {
     path: __dirname + "/dist",
     filename: "main.js"
@@ -19,7 +21,7 @@ module.exports = {
         test: /\.js$/,
         loader: "eslint-loader",
         enforce: "pre",
-        include: [path.resolve(__dirname, "/src/js/")],
+        include: path.resolve(__dirname, "/src/js/"),
         options: {
           formatter: require("eslint-friendly-formatter")
         }
