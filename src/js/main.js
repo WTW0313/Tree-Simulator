@@ -25,7 +25,11 @@ function main() {
   pointsGenerator()
 }
 
-canvas2.onclick = function drawTree() {
+/**
+ * Draw the Tree
+ * @function
+ */
+let drawTree = function() {
   let timer = setInterval(() => {
     if (i >= oldBranches.oldBranchesX.length) {
       clearInterval(timer)

@@ -8,9 +8,12 @@
         <title>Document</title>
     </head>
     <body>
-        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="./dist/main.js"></script>
+        <div id="loading">
+            <input class="btn-enter" type="button" value="Enter" onclick="console.log(drawTree)">
+        </div>
         <?php
         ?>
     </body>
+    <script src="./dist/main.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </html>

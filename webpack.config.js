@@ -2,9 +2,7 @@ var path = require("path")
 var webpack = require("webpack")
 
 module.exports = {
-  entry: {
-    bundle: __dirname + "/src/js/main.js"
-  },
+  entry: __dirname + "/src/js/main.js",
   output: {
     path: __dirname + "/dist",
     filename: "main.js"
@@ -13,12 +11,8 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: [
-          {
-            loader: "babel-loader"
-          }
-        ],
+        exclude: "/node_modules/",
+        loader: "babel-loader",
         include: path.resolve(__dirname, "/src/js/")
       },
       {
