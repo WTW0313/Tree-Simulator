@@ -1,4 +1,16 @@
 import {ctx3} from "./main"
+
+/**
+ * Draw the life cirle.
+ * @function
+ */
+export function drawCircle() {
+  ctx3.strokeStyle = "#C2E38C"
+  ctx3.lineWidth = 1
+  ctx3.arc(100, 100, 80, 0, 2 * Math.PI)
+  ctx3.stroke()
+}
+
 /**
  * Draw the Progressbar.
  * @function

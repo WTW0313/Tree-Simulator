@@ -1,4 +1,5 @@
-import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3, ctx3} from "./main"
+import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3, ctx3, canvas4, ctx4, enter} from "./main"
+import {loadingBar} from "./Loading"
 
 export {Branch, BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenerator}
 
@@ -191,6 +192,11 @@ let createCanvas = function(w, h) {
   ctx3.fillstyle = "#000000"
   ctx3.strokeRect(0, 0, w, h)
   document.body.appendChild(canvas3)
+  canvas4.width = w
+  canvas4.height = h
+  ctx4.fillstyle = "#000000"
+  ctx4.strokeRect(0, 0, w, h)
+  document.body.appendChild(canvas4)
 }
 
 /**
@@ -218,6 +224,7 @@ let pointsGenerator = function(isLoaded) {
   let promise = new Promise((resolve, reject) => {
     let timer = setInterval(function() {
       branches.process()
+      loadingBar(oldBranches.oldBranchesX.length)
       console.log(oldBranches.oldBranchesX.length)
       if (branches.branches.length === 0) {
         clearInterval(timer)
@@ -227,6 +234,6 @@ let pointsGenerator = function(isLoaded) {
   })
   promise.then(() => {
     isLoaded = true
-    showButton()
+    canvas4.style.display = "none"
   })
 }

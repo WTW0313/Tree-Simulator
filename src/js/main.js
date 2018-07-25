@@ -1,6 +1,6 @@
 import {Branch, BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenerator} from "./newTree"
-import {drawProgressbar} from "./progressBar"
-export {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3, ctx3}
+import {drawProgressbar, drawCircle} from "./progressBar"
+export {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3, ctx3, canvas4, ctx4, enter}
 
 window.addEventListener("load", main)
 let canvas1 = document.createElement("canvas")
@@ -12,10 +12,15 @@ let ctx2 = canvas2.getContext("2d")
 let canvas3 = document.createElement("canvas")
 let ctx3 = canvas3.getContext("2d")
 canvas3.className = "canvas3"
+let canvas4 = document.createElement("canvas")
+let ctx4 = canvas4.getContext("2d")
+canvas4.className = "canvas4"
 
 
 let branches = new BranchCollection()
 let oldBranches = new dieBranches()
+
+//Status
 let progress = 0
 let cnt = 0
 let isLoaded = false
@@ -30,17 +35,14 @@ function main() {
   pointsGenerator(isLoaded)
 }
 
-let start = document.createElement("button")
-document.body.appendChild(start)
-start.className = "btn-start"
-start.innerHTML = "Start"
+let enter = document.createElement("button")
+document.body.appendChild(enter)
+enter.className = "btn-enter"
+enter.innerHTML = "Enter"
 
-start.onclick = function() {
-  start.style.display = "none"
-  ctx3.strokeStyle = "#C2E38C"
-  ctx3.lineWidth = 1
-  ctx3.arc(100, 100, 80, 0, 2 * Math.PI)
-  ctx3.stroke()
+enter.onclick = function() {
+  enter.style.display = "none"
+  drawCircle()
   let timer = setInterval(() => {
     if (progress >= oldBranches.oldBranchesX.length) {
       clearInterval(timer)
