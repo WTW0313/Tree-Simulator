@@ -4,7 +4,7 @@ class database {
     var $user_name;
     var $password;
     var $database_name;
-    var $table_name;
+    var $table_name = "users";
     var $tree_message;//关联数组
 
     /** 函数构造器 输入数据库相关参数
@@ -75,7 +75,7 @@ class database {
                 if ($row['username'] == $uname) return "该用户已存在";
             }
             $sql = "insert into $this->table_name (username,password) 
-        values ($uname,$pswd)";
+        values ('$uname','$pswd')";
             $conn->exec($sql);
             return "注册成功！";
         }catch (PDOException $e) {
@@ -94,11 +94,17 @@ class database {
             $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
             $user_list = "select * from $this->table_name where username = '$uname'";
             $res = $conn->query($user_list);
-            if ($res == null) return "用户不存在！";
             foreach ($res as $row) {
-                if ($row['password'] == $pswd) return "登录成功！";
-                else return "密码错误";
+                if ($row['password'] == $pswd) {
+                    echo "登录成功！";
+                    return;
+                }
+                else {
+                    echo "密码错误";
+                    return;
+                }
             }
+            echo "用户不存在";
         }catch (PDOException $e) {
             echo "login" . "<br>" .$e->getMessage();
         }
@@ -118,9 +124,9 @@ class database {
             $find = "select * from $this->table_name where username = '$uname'";
             $res = $conn->query($find);
             $sql = "insert into $this->table_name (x_coordinate,y_coordinate,radius,category)
-        values ($x,$y,$r,$c)";
+        values ('$x','$y','$r','$c')";
             $update = "replace into $this->table_name (x_coordinate,y_coordinate,radius,category)
-        values ($x,$y,$r,$c)";
+        values ('$x','$y','$r','$c')";
             foreach ($res as $row) {
                 if ($row['username'] == $uname) {
                     if ($row[x_coordinate] != null) {

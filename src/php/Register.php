@@ -1,7 +1,8 @@
 <?php
 include 'db.php';
 $data_func = new database("127.0.0.1","root","lisongwei","myTree");
-$data_func->login($_POST['username'],$_POST['password']);
+$data_func->register($_POST['username'],$_POST['password']);
+
 ?>
 <html>
 <head>
@@ -12,10 +13,10 @@ $data_func->login($_POST['username'],$_POST['password']);
     <title>Document</title>
 </head>
 <body>
-<form method="post" action="Login.php">
+<form method="post" action="Register.php">
     username:<input type="text" name="username"><br>
     password:<input type="password" name="password"><br>
-    <input type="submit" value="登录">
+    <input type="submit" value="注册">
 </form>
 </body>
 </html>
