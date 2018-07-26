@@ -1,9 +1,10 @@
 import {BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenerator, drawTree} from "./newTree"
 import {drawCircle} from "./progressBar"
 import {drawtimeCounter} from "./timeCounter"
+import {weatherCondition} from "./weatherCondition"
 
 export {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, 
-  canvas3, ctx3, canvas4, ctx4, canvas5, ctx5, canvas6, ctx6, enter}
+  canvas3, ctx3, canvas4, ctx4, canvas5, ctx5, canvas6, ctx6, canvas7, ctx7, enter, weather}
 
 window.addEventListener("load", main)
 let canvas1 = document.createElement("canvas")
@@ -24,6 +25,9 @@ canvas5.className = "canvas5"
 let canvas6 = document.createElement("canvas")
 let ctx6 = canvas6.getContext("2d")
 canvas6.className = "canvas6"
+let canvas7 = document.createElement("canvas")
+let ctx7 = canvas7.getContext("2d")
+canvas7.className = "canvas7"
 
 //Objects
 let branches = new BranchCollection()
@@ -33,6 +37,7 @@ let oldBranches = new dieBranches()
 let progress = 0
 let cnt = 0
 let time = 0
+let weather = "sunny"
 let isLoaded = false
 
 /**
@@ -48,9 +53,10 @@ function main() {
 let enter = document.createElement("button")
 document.body.appendChild(enter)
 enter.className = "btn-enter"
-enter.innerHTML = "Enter"
+enter.innerHTML = "Continue"
 
 enter.onclick = function() {
+  canvas4.style.display = "none"
   enter.style.display = "none"
   drawCircle()
   drawTree(progress, cnt)

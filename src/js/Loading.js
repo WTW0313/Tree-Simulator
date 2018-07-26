@@ -1,4 +1,4 @@
-import {ctx4, canvas4} from "./main"
+import {ctx4} from "./main"
 /**
  * Draw the loadingbar.
  * @param  {number} loaded The points that have been loaded.

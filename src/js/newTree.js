@@ -1,5 +1,5 @@
 import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3, ctx3,
-  canvas4, ctx4, enter, canvas5, ctx5, canvas6, ctx6} from "./main"
+  canvas4, ctx4, enter, canvas5, ctx5, canvas6, ctx6, canvas7, ctx7} from "./main"
 import {loadingBar} from "./Loading"
 import {drawProgressbar} from "./progressBar"
 import {drawPercent} from "./drawPercent"
@@ -197,6 +197,9 @@ let createCanvas = function(w, h) {
   canvas6.width = w
   canvas6.height = h
   document.body.appendChild(canvas6)
+  canvas7.width = w
+  canvas7.height = h
+  document.body.appendChild(canvas7)
 }
 
 /**
@@ -222,6 +225,10 @@ let initialBranch = function() {
  */
 let pointsGenerator = function(isLoaded) {
   let promise = new Promise((resolve, reject) => {
+    ctx4.fillStyle = "#1CDDB1"
+    ctx4.font = "80px Governor"
+    ctx4.textAlign = "center"
+    ctx4.fillText("Tree Simulator", 0.5 * canvas4.width, 0.5 * canvas4.height)
     let timer = setInterval(function() {
       branches.process()
       loadingBar(oldBranches.oldBranchesX.length, 30000)
@@ -234,9 +241,12 @@ let pointsGenerator = function(isLoaded) {
   })
   promise.then(() => {
     isLoaded = true
-    loadingBar(30000, 30000)
+    ctx4.fillStyle = "#000000"
+    ctx4.strokeStyle = "#000000"
+    ctx4.rect(0, window.innerHeight * 0.9, window.innerWidth, window.innerHeight * 0.02)
+    ctx4.fill()
+    ctx4.stroke()
     let hide = setTimeout(() => {
-      canvas4.style.display = "none"
       enter.style.display = "inline"
       clearTimeout(hide)
     }, 500)
@@ -251,15 +261,15 @@ let pointsGenerator = function(isLoaded) {
  */
 function drawTree(progress, cnt) {
   let timer = setInterval(() => {
-    if (progress >= oldBranches.oldBranchesX.length) {
+    if (progress > oldBranches.oldBranchesX.length) {
+      drawPercent(1, 1)
       clearInterval(timer)
     }
     if (oldBranches.oldBranchesCategory[progress] === "trunk") {
       drawProgressbar(progress, oldBranches.oldBranchesX.length)
       drawPercent(progress, oldBranches.oldBranchesX.length)
+      ctx1.globalAlpha = 0.5
       ctx1.fillStyle = "#946A2C"
-      ctx1.shadowcolor = "#946A2C"
-      ctx1.shadowBlur = 2
       ctx1.beginPath()
       ctx1.moveTo(oldBranches.oldBranchesX[progress], oldBranches.oldBranchesY[progress])
       ctx1.arc(oldBranches.oldBranchesX[progress], oldBranches.oldBranchesY[progress], oldBranches.oldBranchesR[progress], 0, 2*Math.PI, true)
@@ -269,22 +279,23 @@ function drawTree(progress, cnt) {
     if (oldBranches.oldBranchesCategory[progress] === "leaf") {
       drawProgressbar(progress, oldBranches.oldBranchesX.length)
       drawPercent(progress, oldBranches.oldBranchesX.length)
-      if (cnt % 5 === 0 && cnt > 150) {
+      if (cnt % 5 === 0 && cnt > 200) {
         let leaf = new Image()
         let p = Math.random() * 3
         let k = 0
         if (p < 1) {
-          leaf.src = "./assets/leaf-1.png"
+          leaf.src = "../assets/leaf-1.png"
           k = 1
         } else if (p < 2) {
           oldBranches.oldBranchesX[progress] = oldBranches.oldBranchesX[progress] - 20
-          leaf.src = "./assets/leaf-4.png"
+          leaf.src = "../assets/leaf-4.png"
           k = 2
         } else if (p < 3) {
           oldBranches.oldBranchesX[progress] = oldBranches.oldBranchesX[progress] - 10
-          leaf.src = "./assets/leaf-1.png"
+          leaf.src = "../assets/leaf-1.png"
           k = 2
         }
+        ctx2.globalAlpha = 0.7
         ctx2.drawImage(leaf, oldBranches.oldBranchesX[progress], oldBranches.oldBranchesY[progress], 10 * k, 10 * k)
       }
       cnt++

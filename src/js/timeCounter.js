@@ -13,7 +13,8 @@ export function drawtimeCounter(time) {
     minute.toString() + "m " + second.toString() + "s"
   ctx6.fillStyle = "#5E8579"
   ctx6.font = "20px Verdana"
-  ctx6.fillText(text, 0.8 * canvas6.width, 30)
+  ctx6.textAlign = "left"
+  ctx6.fillText(text, 0, canvas6.height - 10)
   let timecounter = setInterval(() => {
     time++
     if (time > 2592000) {
@@ -28,6 +29,7 @@ export function drawtimeCounter(time) {
       minute.toString() + "m " + second.toString() + "s"
     ctx6.fillStyle = "#5E8579"
     ctx6.font = "20px Verdana"
-    ctx6.fillText(text, 0.8 * canvas6.width, 30)
+    ctx6.textAlign = "left"
+    ctx6.fillText(text, 0, canvas6.height - 10)
   }, 1000)
 }
