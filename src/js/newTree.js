@@ -1,7 +1,9 @@
-import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3, ctx3, canvas4, ctx4, enter} from "./main"
+import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3, ctx3,
+  canvas4, ctx4, enter, canvas5, ctx5, canvas6, ctx6} from "./main"
 import {loadingBar} from "./Loading"
-
-export {Branch, BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenerator}
+import {drawProgressbar} from "./progressBar"
+import {drawPercent} from "./drawPercent"
+export {Branch, BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenerator, drawTree}
 
 /**
  * Branch类
@@ -179,24 +181,22 @@ dieBranches.prototype = {
 let createCanvas = function(w, h) {
   canvas1.width = w
   canvas1.height = h
-  ctx1.fillstyle = "#000000"
-  ctx1.strokeRect(0, 0, w, h)
   document.body.appendChild(canvas1)
   canvas2.width = w
   canvas2.height = h
-  ctx2.fillstyle = "#000000"
-  ctx2.strokeRect(0, 0, w, h)
   document.body.appendChild(canvas2)
   canvas3.width = w
   canvas3.height = h
-  ctx3.fillstyle = "#000000"
-  ctx3.strokeRect(0, 0, w, h)
   document.body.appendChild(canvas3)
   canvas4.width = w
   canvas4.height = h
-  ctx4.fillstyle = "#000000"
-  ctx4.strokeRect(0, 0, w, h)
   document.body.appendChild(canvas4)
+  canvas5.width = w
+  canvas5.height = h
+  document.body.appendChild(canvas5)
+  canvas6.width = w
+  canvas6.height = h
+  document.body.appendChild(canvas6)
 }
 
 /**
@@ -224,7 +224,7 @@ let pointsGenerator = function(isLoaded) {
   let promise = new Promise((resolve, reject) => {
     let timer = setInterval(function() {
       branches.process()
-      loadingBar(oldBranches.oldBranchesX.length)
+      loadingBar(oldBranches.oldBranchesX.length, 30000)
       console.log(oldBranches.oldBranchesX.length)
       if (branches.branches.length === 0) {
         clearInterval(timer)
@@ -234,6 +234,62 @@ let pointsGenerator = function(isLoaded) {
   })
   promise.then(() => {
     isLoaded = true
-    canvas4.style.display = "none"
+    loadingBar(30000, 30000)
+    let hide = setTimeout(() => {
+      canvas4.style.display = "none"
+      enter.style.display = "inline"
+      clearTimeout(hide)
+    }, 500)
   })
+}
+
+/**
+ * Draw the tree.
+ * @function
+ * @param {number} progress The number of points that have been painted.
+ * @param {number} cnt The number of leaf points.
+ */
+function drawTree(progress, cnt) {
+  let timer = setInterval(() => {
+    if (progress >= oldBranches.oldBranchesX.length) {
+      clearInterval(timer)
+    }
+    if (oldBranches.oldBranchesCategory[progress] === "trunk") {
+      drawProgressbar(progress, oldBranches.oldBranchesX.length)
+      drawPercent(progress, oldBranches.oldBranchesX.length)
+      ctx1.fillStyle = "#946A2C"
+      ctx1.shadowcolor = "#946A2C"
+      ctx1.shadowBlur = 2
+      ctx1.beginPath()
+      ctx1.moveTo(oldBranches.oldBranchesX[progress], oldBranches.oldBranchesY[progress])
+      ctx1.arc(oldBranches.oldBranchesX[progress], oldBranches.oldBranchesY[progress], oldBranches.oldBranchesR[progress], 0, 2*Math.PI, true)
+      ctx1.closePath()
+      ctx1.fill()
+    }
+    if (oldBranches.oldBranchesCategory[progress] === "leaf") {
+      drawProgressbar(progress, oldBranches.oldBranchesX.length)
+      drawPercent(progress, oldBranches.oldBranchesX.length)
+      if (cnt % 5 === 0 && cnt > 150) {
+        let leaf = new Image()
+        let p = Math.random() * 3
+        let k = 0
+        if (p < 1) {
+          leaf.src = "./assets/leaf-1.png"
+          k = 1
+        } else if (p < 2) {
+          oldBranches.oldBranchesX[progress] = oldBranches.oldBranchesX[progress] - 20
+          leaf.src = "./assets/leaf-4.png"
+          k = 2
+        } else if (p < 3) {
+          oldBranches.oldBranchesX[progress] = oldBranches.oldBranchesX[progress] - 10
+          leaf.src = "./assets/leaf-1.png"
+          k = 2
+        }
+        ctx2.drawImage(leaf, oldBranches.oldBranchesX[progress], oldBranches.oldBranchesY[progress], 10 * k, 10 * k)
+      }
+      cnt++
+    }
+    console.log(progress)
+    progress = progress + 1
+  }, 10)
 }
