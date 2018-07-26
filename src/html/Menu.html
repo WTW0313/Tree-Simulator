@@ -8,9 +8,33 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="../js/Login.js"></script>
+    <script src="../js/menu.js"></script>
 </head>
+<style>
+    .jumbotron{
+        width: 60%;
+        margin: 100px auto;
+    }
+    .btn-success{
+        display: none;
+        margin: 50px auto;
+    }
+    .progress{
+        display: none;
+        width: 60%;
+        margin: 0 auto;
+    }
+</style>
 <body>
-
+<div class="jumbotron">
+    <h3 style="text-align: center">您好：<span id="currentUser"></span></h3>
+    <p style="text-align: center">欢迎来到模拟成长系统</p>
+    <button type="button" class="btn btn-success" id="getNew">新建</button>
+    <button type="button" class="btn btn-success" id="getOld">加载</button>
+</div>
+<div class="progress" id="progress">
+    <div id="active" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+    </div>
+</div>
 </body>
 </html>
