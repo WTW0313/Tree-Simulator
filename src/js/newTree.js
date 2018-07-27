@@ -1,5 +1,5 @@
-import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3, ctx3,
-  canvas4, ctx4, enter, canvas5, ctx5, canvas6, ctx6, canvas7, ctx7} from "./main"
+import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3,
+  canvas4, ctx4, enter, canvas5, canvas6, canvas7, weather} from "./main"
 import {loadingBar} from "./Loading"
 import {drawProgressbar} from "./progressBar"
 import {drawPercent} from "./drawPercent"
@@ -232,7 +232,6 @@ let pointsGenerator = function(isLoaded) {
     let timer = setInterval(function() {
       branches.process()
       loadingBar(oldBranches.oldBranchesX.length, 30000)
-      console.log(oldBranches.oldBranchesX.length)
       if (branches.branches.length === 0) {
         clearInterval(timer)
         resolve()
@@ -241,8 +240,8 @@ let pointsGenerator = function(isLoaded) {
   })
   promise.then(() => {
     isLoaded = true
-    ctx4.fillStyle = "#000000"
-    ctx4.strokeStyle = "#000000"
+    ctx4.fillStyle = "#ffffff"
+    ctx4.strokeStyle = "#ffffff"
     ctx4.rect(0, window.innerHeight * 0.9, window.innerWidth, window.innerHeight * 0.02)
     ctx4.fill()
     ctx4.stroke()
@@ -259,8 +258,19 @@ let pointsGenerator = function(isLoaded) {
  * @param {number} progress The number of points that have been painted.
  * @param {number} cnt The number of leaf points.
  */
-function drawTree(progress, cnt) {
+function drawTree(progress, cnt, growspeed) {
+  let dead = 5
+  drawPercent(0, 1)
   let timer = setInterval(() => {
+    if (weather === "sunny") {
+      dead = 5
+    }
+    if (weather === "cloudy") {
+      dead = 15
+    }
+    if (weather === "rainy") {
+      dead = 10
+    }
     if (progress > oldBranches.oldBranchesX.length) {
       drawPercent(1, 1)
       clearInterval(timer)
@@ -268,7 +278,6 @@ function drawTree(progress, cnt) {
     if (oldBranches.oldBranchesCategory[progress] === "trunk") {
       drawProgressbar(progress, oldBranches.oldBranchesX.length)
       drawPercent(progress, oldBranches.oldBranchesX.length)
-      ctx1.globalAlpha = 0.5
       ctx1.fillStyle = "#946A2C"
       ctx1.beginPath()
       ctx1.moveTo(oldBranches.oldBranchesX[progress], oldBranches.oldBranchesY[progress])
@@ -279,7 +288,7 @@ function drawTree(progress, cnt) {
     if (oldBranches.oldBranchesCategory[progress] === "leaf") {
       drawProgressbar(progress, oldBranches.oldBranchesX.length)
       drawPercent(progress, oldBranches.oldBranchesX.length)
-      if (cnt % 5 === 0 && cnt > 200) {
+      if (cnt % dead === 0 && cnt > 200) {
         let leaf = new Image()
         let p = Math.random() * 3
         let k = 0
@@ -296,11 +305,12 @@ function drawTree(progress, cnt) {
           k = 2
         }
         ctx2.globalAlpha = 0.7
-        ctx2.drawImage(leaf, oldBranches.oldBranchesX[progress], oldBranches.oldBranchesY[progress], 10 * k, 10 * k)
+        leaf.onload = () => {
+          ctx2.drawImage(leaf, oldBranches.oldBranchesX[progress], oldBranches.oldBranchesY[progress], 10 * k, 10 * k)
+        }
       }
       cnt++
     }
-    console.log(progress)
     progress = progress + 1
-  }, 10)
+  }, growspeed)
 }

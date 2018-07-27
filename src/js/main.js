@@ -53,12 +53,13 @@ function main() {
 let enter = document.createElement("button")
 document.body.appendChild(enter)
 enter.className = "btn-enter"
-enter.innerHTML = "Continue"
+enter.innerHTML = "Start"
 
 enter.onclick = function() {
   canvas4.style.display = "none"
   enter.style.display = "none"
   drawCircle()
-  drawTree(progress, cnt)
+  drawTree(progress, cnt, 10)
   drawtimeCounter(time)
+  weatherCondition(weather)
 }
