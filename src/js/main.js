@@ -4,7 +4,8 @@ import {drawtimeCounter} from "./timeCounter"
 import {weatherCondition} from "./weatherCondition"
 
 export {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, 
-  canvas3, ctx3, canvas4, ctx4, canvas5, ctx5, canvas6, ctx6, canvas7, ctx7, enter, weather}
+  canvas3, ctx3, canvas4, ctx4, canvas5, ctx5, canvas6, ctx6,
+  canvas7, ctx7, canvas8, ctx8, enter, weather}
 
 window.addEventListener("load", main)
 let canvas1 = document.createElement("canvas")
@@ -28,6 +29,9 @@ canvas6.className = "canvas6"
 let canvas7 = document.createElement("canvas")
 let ctx7 = canvas7.getContext("2d")
 canvas7.className = "canvas7"
+let canvas8 = document.createElement("canvas")
+canvas8.className = "canvas8"
+let ctx8 = canvas8.getContext("2d")
 
 //Objects
 let branches = new BranchCollection()
@@ -39,6 +43,7 @@ let cnt = 0
 let time = 0
 let weather = "sunny"
 let isLoaded = false
+let isFinished = false
 
 /**
  * Executive function
@@ -62,11 +67,11 @@ enter.onclick = function() {
   enter.style.display = "none"
   list.style.display = "inline"
   drawCircle()
-  ctx1.fillStyle = "#1CDDB1"
+  ctx1.fillStyle = "#000000"
   ctx1.textAlign = "center"
   ctx1.font = "15px Governor"
   ctx1.fillText("Version 1.0", 0.95 * canvas4.width, 0.99 * canvas4.height)
-  drawTree(progress, cnt, 10)
+  drawTree(progress, cnt, 10, isFinished)
   drawtimeCounter(time)
   weatherCondition(weather)
 }

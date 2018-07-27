@@ -14,7 +14,7 @@ export function drawPercent(grown, sum) {
   } else {
     text =　text + "%"
   }
-  ctx5.strokeStyle = "#06B9D1"
+  ctx5.strokeStyle = "#2A5200"
   ctx5.font = "50px Verdana"
   ctx5.textAlign = "center"
   ctx5.strokeText(text,100,115)

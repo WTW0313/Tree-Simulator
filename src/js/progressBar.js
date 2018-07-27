@@ -21,8 +21,9 @@ export function drawProgressbar(progress, sum) {
   let p = 2 * progress * Math.PI / sum
   ctx3.beginPath()
   ctx3.fillStyle = "#76AC32"
-  ctx3.moveTo(100, 100)
-  ctx3.arc(100 - 80 * Math.cos(p), 100 - 80 * Math.sin(p), 4, 0, 2 * Math.PI)
+  ctx3.strokeStyle = "#76AC32"
+  ctx3.arc(100 - 80 * Math.cos(p), 100 - 80 * Math.sin(p), 5, 0, 2 * Math.PI)
   ctx3.closePath()
   ctx3.fill()
+  ctx3.stroke()
 }

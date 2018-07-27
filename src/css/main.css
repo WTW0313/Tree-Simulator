@@ -8,7 +8,7 @@ body {
 }
 
 .canvas1 {
-  z-index: 2;
+  z-index: 1;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -16,7 +16,7 @@ body {
 }
 
 .canvas2 {
-  z-index: 3;
+  z-index: 2;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -61,6 +61,14 @@ body {
   left: 0px;
   top: 0px;
   background-color:rgba(255,255,255,0);
+}
+
+.canvas8 {
+  z-index: -1;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color:rgba(255, 255, 255);
 }
 
 .btn-enter {
@@ -129,7 +137,7 @@ body {
 
 .dropdown button {
   display: block;
-  background-color: #7AE191;
+  background-color: #2A5200;
   color: #ffffff;
   text-align: center;
   border: none;
@@ -145,7 +153,7 @@ body {
 .dropdown button:hover {
   display: block;
   background-color: #ffffff;
-  color: #7AE191;
+  color: #2A5200;
   text-align: center;
   border: none;
   margin: 0%;

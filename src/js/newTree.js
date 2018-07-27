@@ -1,8 +1,10 @@
 import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3,
-  canvas4, ctx4, enter, canvas5, canvas6, canvas7, weather} from "./main"
+  canvas4, ctx4, enter, canvas5, canvas6, canvas7, canvas8, weather} from "./main"
 import {loadingBar} from "./Loading"
 import {drawProgressbar} from "./progressBar"
 import {drawPercent} from "./drawPercent"
+
+
 export {Branch, BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenerator, drawTree}
 
 /**
@@ -92,7 +94,7 @@ Branch.prototype = {
       splitChance = this.distance / window.innerHeight - 0.1
     if (Math.random() < splitChance) {
       let n = 2 + Math.round(Math.random() * 3)
-      for (var i = 0; i < n; i++) {
+      for (let i = 0; i < n; i++) {
         let branch = new Branch()
         branch.x = this.x
         branch.y = this.y
@@ -200,6 +202,9 @@ let createCanvas = function(w, h) {
   canvas7.width = w
   canvas7.height = h
   document.body.appendChild(canvas7)
+  canvas8.width = w
+  canvas8.height = h
+  document.body.appendChild(canvas8)
 }
 
 /**
@@ -260,7 +265,7 @@ let pointsGenerator = function(isLoaded) {
  * @param {number} progress The number of points that have been painted.
  * @param {number} cnt The number of leaf points.
  */
-function drawTree(progress, cnt, growspeed) {
+function drawTree(progress, cnt, growspeed, isFinished) {
   let dead = 5
   drawPercent(0, 1)
   let timer = setInterval(() => {
@@ -274,6 +279,7 @@ function drawTree(progress, cnt, growspeed) {
       dead = 10
     }
     if (progress > oldBranches.oldBranchesX.length) {
+      isFinished = true
       drawPercent(1, 1)
       clearInterval(timer)
     }
