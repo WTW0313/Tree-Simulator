@@ -226,9 +226,11 @@ let initialBranch = function() {
 let pointsGenerator = function(isLoaded) {
   let promise = new Promise((resolve, reject) => {
     ctx4.fillStyle = "#1CDDB1"
-    ctx4.font = "80px Governor"
     ctx4.textAlign = "center"
+    ctx4.font = "80px Governor"
     ctx4.fillText("Tree Simulator", 0.5 * canvas4.width, 0.5 * canvas4.height)
+    ctx4.font = "15px Governor"
+    ctx4.fillText("v 1.0", 0.5 * canvas4.width, 0.55 * canvas4.height)
     let timer = setInterval(function() {
       branches.process()
       loadingBar(oldBranches.oldBranchesX.length, 30000)

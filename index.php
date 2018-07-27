@@ -8,8 +8,15 @@
         <title>Document</title>
     </head>
     <body>
-        <?php
-        ?>
+        <div id="list" class="list">
+            <div class="dropdown">
+                <button class="showdropdownlist">Home</button>
+                    <div class="dropdownlist">
+                        <button id="menu"><span>Menu</span></button>
+                        <button id="save"><span>Save</span></button>
+                </div>
+            </div>
+        </div>
     </body>
     <script src="./dist/main.js"></script>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>

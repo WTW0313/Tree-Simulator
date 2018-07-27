@@ -55,10 +55,17 @@ document.body.appendChild(enter)
 enter.className = "btn-enter"
 enter.innerHTML = "Start"
 
+let list = document.getElementById("list")
+
 enter.onclick = function() {
   canvas4.style.display = "none"
   enter.style.display = "none"
+  list.style.display = "inline"
   drawCircle()
+  ctx1.fillStyle = "#1CDDB1"
+  ctx1.textAlign = "center"
+  ctx1.font = "15px Governor"
+  ctx1.fillText("Version 1.0", 0.95 * canvas4.width, 0.99 * canvas4.height)
   drawTree(progress, cnt, 10)
   drawtimeCounter(time)
   weatherCondition(weather)
