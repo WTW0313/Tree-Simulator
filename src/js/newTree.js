@@ -1,9 +1,9 @@
 import {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, canvas3,
-  canvas4, ctx4, enter, canvas5, canvas6, canvas7, canvas8, weather} from "./main"
+  canvas4, ctx4, enter, canvas5, canvas6, canvas7, canvas8, weather, time} from "./main"
 import {loadingBar} from "./Loading"
 import {drawProgressbar} from "./progressBar"
 import {drawPercent} from "./drawPercent"
-
+import {setCookie, getCookie} from "./cookie"
 
 export {Branch, BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenerator, drawTree}
 
@@ -265,7 +265,7 @@ let pointsGenerator = function(isLoaded) {
  * @param {number} progress The number of points that have been painted.
  * @param {number} cnt The number of leaf points.
  */
-function drawTree(progress, cnt, growspeed, isFinished) {
+function drawTree(progress, cnt, growspeed) {
   let dead = 5
   drawPercent(0, 1)
   let timer = setInterval(() => {

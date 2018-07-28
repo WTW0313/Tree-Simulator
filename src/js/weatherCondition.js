@@ -56,5 +56,5 @@ export function weatherCondition(weather) {
       }
       rain()
     }
-  }, 10000)
+  }, 60000)
 }

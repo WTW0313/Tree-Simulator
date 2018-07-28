@@ -2,10 +2,11 @@ import {BranchCollection, dieBranches, createCanvas, initialBranch, pointsGenera
 import {drawCircle} from "./progressBar"
 import {drawtimeCounter} from "./timeCounter"
 import {weatherCondition} from "./weatherCondition"
+import {setCookie, getCookie} from "./cookie"
 
 export {canvas1, ctx1, branches, oldBranches, canvas2, ctx2, 
   canvas3, ctx3, canvas4, ctx4, canvas5, ctx5, canvas6, ctx6,
-  canvas7, ctx7, canvas8, ctx8, enter, weather}
+  canvas7, ctx7, canvas8, ctx8, enter, weather, time}
 
 window.addEventListener("load", main)
 let canvas1 = document.createElement("canvas")
@@ -45,16 +46,7 @@ let weather = "sunny"
 let isLoaded = false
 let isFinished = false
 
-/**
- * Executive function
- * @function
- */
-function main() {
-  createCanvas(window.innerWidth, window.innerHeight)
-  initialBranch()
-  pointsGenerator(isLoaded)
-}
-
+//Buttons
 let enter = document.createElement("button")
 document.body.appendChild(enter)
 enter.className = "btn-enter"
@@ -71,7 +63,17 @@ enter.onclick = function() {
   ctx1.textAlign = "center"
   ctx1.font = "15px Governor"
   ctx1.fillText("Version 1.0", 0.95 * canvas4.width, 0.99 * canvas4.height)
-  drawTree(progress, cnt, 10, isFinished)
+  drawTree(progress, cnt, 10000, isFinished)
   drawtimeCounter(time)
   weatherCondition(weather)
+}
+
+/**
+ * Executive function
+ * @function
+ */
+function main() {
+  createCanvas(window.innerWidth, window.innerHeight)
+  initialBranch()
+  pointsGenerator(isLoaded)
 }
